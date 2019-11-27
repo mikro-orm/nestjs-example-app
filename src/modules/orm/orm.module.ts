@@ -1,25 +1,14 @@
-import { Logger, Module } from '@nestjs/common';
-import { MikroORM, Options } from 'mikro-orm';
+import { Module } from '@nestjs/common';
 import { MikroOrmModule } from 'nestjs-mikro-orm';
 
-import { Author, Book, BaseEntity, BookTag, Publisher } from '../../entities';
-
-const logger = new Logger(MikroORM.name);
-const ormOptions = {
-  entities: [Author, Book, BookTag, Publisher, BaseEntity],
-  entitiesDirsTs: ['src/entities'],
-  dbName: 'mikro-orm-nest-ts',
-  type: 'mysql',
-  port: 3307,
-  debug: true,
-  logger: logger.log.bind(logger),
-} as Options;
+import { Author, Book, BookTag, Publisher } from '../../entities';
+import config from '../../mikro-orm.config';
 
 @Module({
   imports: [
-    MikroOrmModule.forRoot(ormOptions),
+    MikroOrmModule.forRoot(config),
     MikroOrmModule.forFeature({
-      entities: [Author, Book, BookTag, Publisher, BaseEntity as any],
+      entities: [Author, Book, BookTag, Publisher],
     }),
   ],
   exports: [MikroOrmModule],
