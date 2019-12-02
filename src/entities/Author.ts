@@ -21,7 +21,7 @@ export class Author extends BaseEntity {
   @Property()
   born?: Date;
 
-  @OneToMany(() => Book, b => b.author, { cascade: [Cascade.PERSIST, Cascade.REMOVE] })
+  @OneToMany(() => Book, b => b.author, { cascade: [Cascade.ALL] })
   books = new Collection<Book>(this);
 
   @ManyToOne()
