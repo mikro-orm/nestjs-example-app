@@ -1,8 +1,8 @@
-import { Collection, Entity, Enum, IdEntity, OneToMany, PrimaryKey, Property } from 'mikro-orm';
+import { Collection, Entity, Enum, OneToMany, PrimaryKey, Property } from '@mikro-orm/core';
 import { Book } from '.';
 
 @Entity()
-export class Publisher implements IdEntity<Publisher> {
+export class Publisher {
 
   @PrimaryKey()
   id!: number;

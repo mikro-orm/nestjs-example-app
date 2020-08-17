@@ -1,6 +1,6 @@
-import { IdEntity, PrimaryKey, Property } from 'mikro-orm';
+import { PrimaryKey, Property } from '@mikro-orm/core';
 
-export abstract class BaseEntity implements IdEntity<BaseEntity> {
+export abstract class BaseEntity {
 
   @PrimaryKey()
   id!: number;

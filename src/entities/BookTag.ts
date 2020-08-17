@@ -1,8 +1,8 @@
-import { Collection, Entity, IdEntity, ManyToMany, PrimaryKey, Property } from 'mikro-orm';
+import { Collection, Entity, ManyToMany, PrimaryKey, Property } from '@mikro-orm/core';
 import { Book } from '.';
 
 @Entity()
-export class BookTag implements IdEntity<BookTag> {
+export class BookTag {
 
   @PrimaryKey()
   id!: number;

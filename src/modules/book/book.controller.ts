@@ -1,6 +1,6 @@
 import { Get, Controller, Post, Put, HttpStatus, HttpException, Param, Body } from '@nestjs/common';
-import { EntityRepository, QueryOrder, wrap } from 'mikro-orm';
-import { InjectRepository } from 'nestjs-mikro-orm';
+import { EntityRepository, QueryOrder, wrap } from '@mikro-orm/core';
+import { InjectRepository } from '@mikro-orm/nestjs';
 import { Book } from '../../entities';
 
 @Controller('book')
