@@ -1,6 +1,5 @@
 import { Logger } from '@nestjs/common';
 import { Options } from '@mikro-orm/core';
-import { TsMorphMetadataProvider } from '@mikro-orm/reflection';
 import { SqlHighlighter } from '@mikro-orm/sql-highlighter';
 import { Author, BaseEntity, Book, BookTag, Publisher } from './entities';
 
@@ -10,7 +9,6 @@ const config = {
   dbName: 'mikro-orm-nest-ts',
   type: 'mysql',
   port: 3307,
-  metadataProvider: TsMorphMetadataProvider,
   highlighter: new SqlHighlighter(),
   debug: true,
   logger: logger.log.bind(logger),

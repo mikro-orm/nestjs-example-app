@@ -24,7 +24,7 @@ export class Author extends BaseEntity {
   @OneToMany(() => Book, b => b.author, { cascade: [Cascade.ALL] })
   books = new Collection<Book>(this);
 
-  @ManyToOne()
+  @ManyToOne(() => Book)
   favouriteBook?: Book;
 
   constructor(name: string, email: string) {

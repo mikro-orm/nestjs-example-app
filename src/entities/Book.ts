@@ -8,13 +8,13 @@ export class Book extends BaseEntity {
   @Property()
   title: string;
 
-  @ManyToOne()
+  @ManyToOne(() => Author)
   author: Author;
 
-  @ManyToOne({ cascade: [Cascade.PERSIST, Cascade.REMOVE] })
+  @ManyToOne(() => Publisher, { cascade: [Cascade.PERSIST, Cascade.REMOVE] })
   publisher?: Publisher;
 
-  @ManyToMany()
+  @ManyToMany(() => BookTag)
   tags = new Collection<BookTag>(this);
 
   @Property()
