@@ -43,7 +43,7 @@
     "nodemon": "^2.0.4",
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
-    "supertest": "^4.0.2",
+    "supertest": "^6.0.0",
     "ts-jest": "^27.0.0",
     "ts-loader": "^8.0.2",
     "ts-node": "^8.10.2",
