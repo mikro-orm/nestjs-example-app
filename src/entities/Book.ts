@@ -11,19 +11,19 @@ export class Book extends BaseEntity {
   @ManyToOne(() => Author)
   author: Author;
 
-  @ManyToOne(() => Publisher, { cascade: [Cascade.PERSIST, Cascade.REMOVE] })
+  @ManyToOne(() => Publisher, { cascade: [Cascade.PERSIST, Cascade.REMOVE], nullable: true })
   publisher?: Publisher;
 
   @ManyToMany(() => BookTag)
   tags = new Collection<BookTag>(this);
 
-  @Property()
+  @Property({ nullable: true })
   metaObject?: object;
 
-  @Property()
+  @Property({ nullable: true })
   metaArray?: any[];
 
-  @Property()
+  @Property({ nullable: true })
   metaArrayOfStrings?: string[];
 
   constructor(title: string, author: Author) {

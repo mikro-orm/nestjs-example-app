@@ -1,4 +1,4 @@
-import { Get, Controller, Post, Put, HttpStatus, HttpException, Param, Body } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Put } from '@nestjs/common';
 import { EntityRepository, QueryOrder, wrap } from '@mikro-orm/core';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { Book } from '../../entities';
@@ -10,18 +10,18 @@ export class BookController {
 
   @Get()
   async find() {
-    return await this.bookRepository.findAll(['author'], { title: QueryOrder.DESC }, 20);
+    return await this.bookRepository.findAll({
+      populate: ['author'],
+      orderBy: { title: QueryOrder.DESC },
+      limit: 20,
+    });
   }
 
   @Get(':id')
   async findOne(@Param() id: string) {
-    const book = await this.bookRepository.findOne(+id, ['books']);
-
-    if (!book) {
-      throw new HttpException('Book not found', HttpStatus.NOT_FOUND);
-    }
-
-    return book;
+    return await this.bookRepository.findOneOrFail(+id, {
+      populate: ['author'],
+    });
   }
 
   @Post()
@@ -30,9 +30,9 @@ export class BookController {
       throw new HttpException('One of `title, author` is missing', HttpStatus.BAD_REQUEST);
     }
 
-    const book = new Book(body.title, body.author);
-    wrap(book).assign(body);
-    await this.bookRepository.persist(book);
+    const book = this.bookRepository.create(body);
+    wrap(book.author, true).__initialized = true;
+    await this.bookRepository.persist(book).flush();
 
     return book;
   }

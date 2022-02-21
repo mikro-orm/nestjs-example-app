@@ -1,4 +1,4 @@
-import { Cascade, Collection, Entity, OneToMany, Property, ManyToOne } from '@mikro-orm/core';
+import { Cascade, Collection, Entity, OneToMany, Property, ManyToOne, OptionalProps } from '@mikro-orm/core';
 
 import { Book } from '.';
 import { BaseEntity } from './BaseEntity';
@@ -6,25 +6,27 @@ import { BaseEntity } from './BaseEntity';
 @Entity()
 export class Author extends BaseEntity {
 
+  [OptionalProps]?: 'termsAccepted';
+
   @Property()
   name: string;
 
   @Property()
   email: string;
 
-  @Property()
+  @Property({ nullable: true })
   age?: number;
 
   @Property()
-  termsAccepted = false;
+  termsAccepted: boolean = false;
 
-  @Property()
+  @Property({ nullable: true })
   born?: Date;
 
   @OneToMany(() => Book, b => b.author, { cascade: [Cascade.ALL] })
   books = new Collection<Book>(this);
 
-  @ManyToOne(() => Book)
+  @ManyToOne(() => Book, { nullable: true })
   favouriteBook?: Book;
 
   constructor(name: string, email: string) {
