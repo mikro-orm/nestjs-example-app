@@ -48,7 +48,7 @@ describe('author controller', () => {
     expect(res2[0].termsAccepted).toBe(false);
     expect(res2[0].books).toHaveLength(2);
 
-    const res3 = await authorController.update('' + id, { name: 'a2' });
+    const res3 = await authorController.update(id, { name: 'a2' });
     expect(res3.id).toBeDefined();
     expect(res3.name).toBe('a2');
     expect(res3.email).toBe('e1');

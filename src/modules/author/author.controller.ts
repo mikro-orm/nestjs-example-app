@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
 import { EntityRepository, QueryOrder, wrap } from '@mikro-orm/core';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { Author } from '../../entities';
@@ -18,8 +18,8 @@ export class AuthorController {
   }
 
   @Get(':id')
-  async findOne(@Param() id: string) {
-    return await this.authorRepository.findOneOrFail(+id, {
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    return await this.authorRepository.findOneOrFail(id, {
       populate: ['books'],
     });
   }
@@ -37,8 +37,8 @@ export class AuthorController {
   }
 
   @Put(':id')
-  async update(@Param() id: string, @Body() body: any) {
-    const author = await this.authorRepository.findOneOrFail(+id);
+  async update(@Param('id', ParseIntPipe) id: number, @Body() body: any) {
+    const author = await this.authorRepository.findOneOrFail(id);
     wrap(author).assign(body);
     await this.authorRepository.persist(author);
 
