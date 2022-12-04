@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
 import { EntityRepository, QueryOrder, wrap } from '@mikro-orm/core';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { Book } from '../../entities';
@@ -18,8 +18,8 @@ export class BookController {
   }
 
   @Get(':id')
-  async findOne(@Param() id: string) {
-    return await this.bookRepository.findOneOrFail(+id, {
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    return await this.bookRepository.findOneOrFail(id, {
       populate: ['author'],
     });
   }
@@ -38,8 +38,8 @@ export class BookController {
   }
 
   @Put(':id')
-  async update(@Param() id: string, @Body() body: any) {
-    const book = await this.bookRepository.findOne(+id);
+  async update(@Param('id', ParseIntPipe) id: number, @Body() body: any) {
+    const book = await this.bookRepository.findOne(id);
 
     if (!book) {
       throw new HttpException('Book not found', HttpStatus.NOT_FOUND);
