@@ -1,5 +1,5 @@
 import { Body, Controller, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
-import { EntityRepository, QueryOrder, wrap } from '@mikro-orm/core';
+import { EntityRepository, FilterQuery, QueryOrder, wrap } from '@mikro-orm/core';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { Author } from '../../entities';
 
@@ -10,7 +10,11 @@ export class AuthorController {
 
   @Get()
   async find() {
-    return await this.authorRepository.findAll({
+    const where: FilterQuery<Author> = {}
+
+    where.name = { $gte: 40 }
+
+    return await this.authorRepository.findAndCount(where,{
       populate: ['books'],
       orderBy: { name: QueryOrder.DESC },
       limit: 20,

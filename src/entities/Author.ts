@@ -15,7 +15,7 @@ export class Author extends BaseEntity {
   email: string;
 
   @Property({ nullable: true })
-  age?: number;
+  readonly age?: number;
 
   @Property()
   termsAccepted: boolean = false;
