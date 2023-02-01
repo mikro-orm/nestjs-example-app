@@ -21,8 +21,8 @@
   },
   "dependencies": {
     "@mikro-orm/core": "^5.0.3",
-    "@mikro-orm/mysql": "^5.0.3",
     "@mikro-orm/nestjs": "^5.0.0",
+    "@mikro-orm/postgresql": "^5.0.3",
     "@mikro-orm/reflection": "^5.0.3",
     "@mikro-orm/sql-highlighter": "^1.0.1",
     "@nestjs/common": "^9.0.0",
@@ -65,7 +65,8 @@
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "testTimeout": 50000
   },
   "mikro-orm": {
     "useTsNode": true,

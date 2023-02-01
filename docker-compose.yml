@@ -1,16 +1,21 @@
-version: "3.4"
-
+version: "3.8"
 services:
-  mysql:
-    container_name: mysql
-    image: mysql:8.0
-    restart: unless-stopped
+  db:
+    container_name: postgres
+    image: postgres:15
+    command: [ "postgres", "-c", "log_statement=all" ]
     ports:
-      - "3307:3306"
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      - "5432:5432"
     volumes:
-      - mysql:/var/lib/mysql
+      - db_data:/var/lib/postgresql
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "10"
 
 volumes:
-  mysql:
+  db_data: ~

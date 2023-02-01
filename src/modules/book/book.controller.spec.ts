@@ -1,12 +1,12 @@
 import { MikroORM } from '@mikro-orm/core';
-import { Test } from '@nestjs/testing';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
-import config from '../../mikro-orm.config';
+import { Test } from '@nestjs/testing';
 import { Book } from '../../entities';
+import config from '../../mikro-orm.config';
 import { BookController } from './book.controller';
+import { BookService } from './book.service';
 
-describe('author controller', () => {
-
+describe('book controller', () => {
   let bookController: BookController;
   let orm: MikroORM;
 
@@ -15,12 +15,12 @@ describe('author controller', () => {
       imports: [
         MikroOrmModule.forRoot({
           ...config,
-          dbName: 'nest-mikro-test-db',
           allowGlobalContext: true,
         }),
         MikroOrmModule.forFeature({ entities: [Book] }),
       ],
       controllers: [BookController],
+      providers: [BookService],
     }).compile();
 
     bookController = module.get(BookController);
@@ -31,7 +31,10 @@ describe('author controller', () => {
   afterAll(async () => await orm.close(true));
 
   it(`CRUD`, async () => {
-    const res1 = await bookController.create({ title: 'b1', author: { name: 'a1', email: 'e1' } });
+    const res1 = await bookController.create({
+      title: 'b1',
+      author: { name: 'a1', email: 'e1' },
+    });
     expect(res1.id).toBeDefined();
     expect(res1.title).toBe('b1');
     expect(res1.author.name).toBe('a1');
@@ -53,5 +56,4 @@ describe('author controller', () => {
     expect(res3.title).toBe('b2');
     expect(res3.author).toBeDefined();
   });
-
 });
