@@ -2,11 +2,15 @@ import { Body, Controller, Get, HttpException, HttpStatus, Param, ParseIntPipe, 
 import { EntityRepository, QueryOrder, wrap } from '@mikro-orm/core';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { Book } from '../../entities';
+import { EntityManager } from '@mikro-orm/mysql';
 
 @Controller('book')
 export class BookController {
 
-  constructor(@InjectRepository(Book) private readonly bookRepository: EntityRepository<Book>) { }
+  constructor(
+    @InjectRepository(Book) private readonly bookRepository: EntityRepository<Book>,
+    private readonly em: EntityManager,
+  ) { }
 
   @Get()
   async find() {
@@ -31,8 +35,7 @@ export class BookController {
     }
 
     const book = this.bookRepository.create(body);
-    wrap(book.author, true).__initialized = true;
-    await this.bookRepository.persist(book).flush();
+    await this.em.flush();
 
     return book;
   }
@@ -46,7 +49,7 @@ export class BookController {
     }
 
     wrap(book).assign(body);
-    await this.bookRepository.persist(book);
+    await this.em.flush();
 
     return book;
   }

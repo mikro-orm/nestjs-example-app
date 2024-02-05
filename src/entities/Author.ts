@@ -1,12 +1,10 @@
-import { Cascade, Collection, Entity, OneToMany, Property, ManyToOne, OptionalProps } from '@mikro-orm/core';
+import { Cascade, Collection, Entity, OneToMany, Property, ManyToOne, Opt } from '@mikro-orm/core';
 
 import { Book } from '.';
 import { BaseEntity } from './BaseEntity';
 
 @Entity()
 export class Author extends BaseEntity {
-
-  [OptionalProps]?: 'termsAccepted';
 
   @Property()
   name: string;
@@ -18,7 +16,7 @@ export class Author extends BaseEntity {
   age?: number;
 
   @Property()
-  termsAccepted: boolean = false;
+  termsAccepted: boolean & Opt = false;
 
   @Property({ nullable: true })
   born?: Date;

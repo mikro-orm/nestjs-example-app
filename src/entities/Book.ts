@@ -1,5 +1,7 @@
 import { Cascade, Collection, Entity, ManyToMany, ManyToOne, Property } from '@mikro-orm/core';
-import { Author, BookTag, Publisher } from './index';
+import { Author } from './Author';
+import { BookTag } from './BookTag';
+import { Publisher } from './Publisher';
 import { BaseEntity } from './BaseEntity';
 
 @Entity()

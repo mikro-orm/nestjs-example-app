@@ -1,5 +1,5 @@
-import { Collection, Entity, Enum, OneToMany, PrimaryKey, Property } from '@mikro-orm/core';
-import { Book } from '.';
+import { Collection, Entity, Enum, OneToMany, Opt, PrimaryKey, Property } from '@mikro-orm/core';
+import { Book } from './Book';
 
 @Entity()
 export class Publisher {
@@ -13,8 +13,8 @@ export class Publisher {
   @OneToMany(() => Book, b => b.publisher)
   books = new Collection<Book>(this);
 
-  @Enum()
-  type: PublisherType;
+  @Enum(() => PublisherType)
+  type: PublisherType & Opt;
 
   constructor(name: string, type = PublisherType.LOCAL) {
     this.name = name;

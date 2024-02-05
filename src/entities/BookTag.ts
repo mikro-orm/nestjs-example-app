@@ -1,5 +1,5 @@
 import { Collection, Entity, ManyToMany, PrimaryKey, Property } from '@mikro-orm/core';
-import { Book } from '.';
+import { Book } from './Book';
 
 @Entity()
 export class BookTag {
@@ -11,7 +11,7 @@ export class BookTag {
   name: string;
 
   @ManyToMany(() => Book, b => b.tags)
-  books: Collection<Book> = new Collection<Book>(this);
+  books = new Collection<Book>(this);
 
   constructor(name: string) {
     this.name = name;

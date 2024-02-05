@@ -1,12 +1,15 @@
 import { Body, Controller, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
-import { EntityRepository, QueryOrder, wrap } from '@mikro-orm/core';
+import { EntityRepository, QueryOrder, wrap, EntityManager } from '@mikro-orm/mysql';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { Author } from '../../entities';
 
 @Controller('author')
 export class AuthorController {
 
-  constructor(@InjectRepository(Author) private readonly authorRepository: EntityRepository<Author>) { }
+  constructor(
+    @InjectRepository(Author) private readonly authorRepository: EntityRepository<Author>,
+    private readonly em: EntityManager,
+  ) { }
 
   @Get()
   async find() {
@@ -31,7 +34,7 @@ export class AuthorController {
     }
 
     const author = this.authorRepository.create(body);
-    await this.authorRepository.persist(author).flush();
+    await this.em.flush();
 
     return author;
   }
@@ -40,7 +43,7 @@ export class AuthorController {
   async update(@Param('id', ParseIntPipe) id: number, @Body() body: any) {
     const author = await this.authorRepository.findOneOrFail(id);
     wrap(author).assign(body);
-    await this.authorRepository.persist(author);
+    await this.em.flush();
 
     return author;
   }
