@@ -1,12 +1,9 @@
 import { Collection, Entity, ManyToMany, PrimaryKey, Property } from '@mikro-orm/core';
 import { Book } from './Book';
+import { BaseEntity } from './BaseEntity';
 
 @Entity()
-export class BookTag {
-
-  @PrimaryKey()
-  id!: number;
-
+export class BookTag extends BaseEntity{
   @Property()
   name: string;
 
