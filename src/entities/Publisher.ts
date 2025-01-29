@@ -1,9 +1,10 @@
 import { Collection, Entity, Enum, OneToMany, Opt, PrimaryKey, Property } from '@mikro-orm/core';
 import { Book } from './Book';
-import { BaseEntity } from "./BaseEntity"
+import { BaseEntity } from './BaseEntity';
 
 @Entity()
 export class Publisher extends BaseEntity {
+
   @Property()
   name: string;
 
