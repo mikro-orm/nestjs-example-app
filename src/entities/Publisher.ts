@@ -15,6 +15,7 @@ export class Publisher extends BaseEntity {
   type: PublisherType & Opt;
 
   constructor(name: string, type = PublisherType.LOCAL) {
+    super();
     this.name = name;
     this.type = type;
   }
