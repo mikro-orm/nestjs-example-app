@@ -25,7 +25,7 @@
     "@mikro-orm/nestjs": "^6.1.0",
     "@mikro-orm/reflection": "^6.4.4",
     "@mikro-orm/sql-highlighter": "^1.0.1",
-    "@nestjs/common": "^11.0.6",
+    "@nestjs/common": "^11.0.16",
     "@nestjs/core": "^11.0.6",
     "@nestjs/platform-express": "^11.0.6",
     "reflect-metadata": "^0.2.0",
