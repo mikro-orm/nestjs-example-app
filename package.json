@@ -36,7 +36,7 @@
     "@mikro-orm/cli": "^6.4.4",
     "@nestjs/testing": "^11.0.6",
     "@types/express": "^5.0.0",
-    "@types/jest": "^29.5.14",
+    "@types/jest": "^30.0.0",
     "@types/node": "^22.12.0",
     "@types/supertest": "^6.0.2",
     "jest": "^30.0.0",
