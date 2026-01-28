@@ -1,11 +1,9 @@
 import { Collection, Entity, Enum, OneToMany, Opt, PrimaryKey, Property } from '@mikro-orm/core';
 import { Book } from './Book';
+import { BaseEntity } from './BaseEntity';
 
 @Entity()
-export class Publisher {
-
-  @PrimaryKey()
-  id!: number;
+export class Publisher extends BaseEntity {
 
   @Property()
   name: string;
@@ -17,6 +15,7 @@ export class Publisher {
   type: PublisherType & Opt;
 
   constructor(name: string, type = PublisherType.LOCAL) {
+    super();
     this.name = name;
     this.type = type;
   }
