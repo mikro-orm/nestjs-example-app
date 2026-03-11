@@ -1,4 +1,4 @@
-import { MikroORM } from '@mikro-orm/core';
+import { MikroORM } from '@mikro-orm/mysql';
 import { Test } from '@nestjs/testing';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import config from '../../mikro-orm.config';
@@ -25,7 +25,7 @@ describe('author controller', () => {
 
     bookController = module.get(BookController);
     orm = module.get(MikroORM);
-    await orm.getSchemaGenerator().refreshDatabase();
+    await orm.schema.refresh();
   });
 
   afterAll(async () => await orm.close(true));

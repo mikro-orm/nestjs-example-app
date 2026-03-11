@@ -1,4 +1,5 @@
-import { Collection, Entity, Enum, OneToMany, Opt, PrimaryKey, Property } from '@mikro-orm/core';
+import { Entity, Enum, OneToMany, PrimaryKey, Property } from '@mikro-orm/decorators/legacy';
+import { Collection, Opt } from '@mikro-orm/mysql';
 import { Book } from './Book';
 
 @Entity()

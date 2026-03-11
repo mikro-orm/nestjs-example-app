@@ -1,4 +1,5 @@
-import { Opt, PrimaryKey, Property } from '@mikro-orm/core';
+import { PrimaryKey, Property } from '@mikro-orm/decorators/legacy';
+import { Opt } from '@mikro-orm/mysql';
 
 export abstract class BaseEntity {
 

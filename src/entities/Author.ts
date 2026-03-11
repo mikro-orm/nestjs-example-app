@@ -1,4 +1,5 @@
-import { Cascade, Collection, Entity, OneToMany, Property, ManyToOne, Opt } from '@mikro-orm/core';
+import { Entity, OneToMany, Property, ManyToOne } from '@mikro-orm/decorators/legacy';
+import { Cascade, Collection, Opt } from '@mikro-orm/mysql';
 
 import { Book } from '.';
 import { BaseEntity } from './BaseEntity';
