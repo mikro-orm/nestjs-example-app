@@ -25,7 +25,7 @@ describe('author controller', () => {
 
     bookController = module.get(BookController);
     orm = module.get(MikroORM);
-    await orm.schema.refresh({ dropDb: true });
+    await orm.schema.refresh();
   });
 
   afterAll(async () => await orm.close(true));
