@@ -30,7 +30,7 @@ jobs:
           corepack prepare yarn@stable --activate
 
       - name: Init docker
-        run: docker compose up -d
+        run: docker compose up -d --wait
 
       - name: Install
         run: yarn
