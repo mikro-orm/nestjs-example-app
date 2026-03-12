@@ -1,6 +1,7 @@
 import { Logger } from '@nestjs/common';
 import { SqlHighlighter } from '@mikro-orm/sql-highlighter';
 import { defineConfig } from '@mikro-orm/mysql';
+import { ReflectMetadataProvider } from '@mikro-orm/decorators/legacy';
 import { Author, BaseEntity, Book, BookTag, Publisher } from './entities';
 
 const logger = new Logger('MikroORM');
@@ -10,6 +11,7 @@ export default defineConfig({
   dbName: 'mikro-orm-nest-ts',
   port: 3307,
   highlighter: new SqlHighlighter(),
+  metadataProvider: ReflectMetadataProvider,
   debug: true,
   logger: logger.log.bind(logger),
   dynamicImportProvider: id => import(id),

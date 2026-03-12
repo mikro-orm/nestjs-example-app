@@ -4,7 +4,13 @@ import swc from 'unplugin-swc';
 export default defineConfig({
   plugins: [
     swc.vite({
-      jsc: { target: 'es2024' },
+      jsc: {
+        target: 'es2024',
+        transform: {
+          legacyDecorator: true,
+          decoratorMetadata: true,
+        },
+      },
       sourceMaps: true,
     }),
   ],
@@ -12,6 +18,7 @@ export default defineConfig({
     environment: 'node',
     include: ['src/**/*.spec.ts'],
     globals: true,
+    setupFiles: ['reflect-metadata'],
     coverage: {
       reporter: ['clover', 'json', 'lcov', 'text'],
       include: ['src/**/*.ts'],
