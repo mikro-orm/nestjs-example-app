@@ -25,7 +25,7 @@ export default defineConfig({
     },
     disableConsoleIntercept: true,
     clearMocks: true,
-    isolate: false,
+    fileParallelism: false,
     testTimeout: 60_000,
   },
 });
