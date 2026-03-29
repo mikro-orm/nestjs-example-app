@@ -7,8 +7,8 @@
   "scripts": {
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "tsx src/main.ts",
-    "start:dev": "nodemon",
-    "start:debug": "nodemon --config nodemon-debug.json",
+    "start:dev": "tsx watch src/main.ts",
+    "start:debug": "tsx watch --inspect src/main.ts",
     "prestart:prod": "rimraf dist && tsc",
     "start:prod": "node dist/main.js",
     "start:hmr": "node dist/server",
@@ -38,7 +38,6 @@
     "@types/express": "^5.0.0",
     "@types/node": "^24.0.0",
     "@types/supertest": "^7.0.0",
-    "nodemon": "^3.0.3",
     "prettier": "^3.2.5",
     "rimraf": "^6.0.0",
     "supertest": "^7.0.0",
