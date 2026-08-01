@@ -1,18 +1,16 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "nodenext",
     "declaration": true,
     "noImplicitAny": false,
     "removeComments": true,
     "noLib": false,
     "strict": true,
-    "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es6",
+    "target": "es2022",
     "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./src"
+    "outDir": "./dist"
   },
   "include": [
     "src/**/*"

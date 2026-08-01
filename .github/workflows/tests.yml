@@ -14,24 +14,23 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [ 18, 20 ]
+        node-version: [ 22, 24 ]
     steps:
       - name: Checkout Source code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Cache node_modules
-        uses: actions/cache@v4
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-${{ matrix.node-version }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Enable corepack
+        run: |
+          corepack enable
+          corepack prepare yarn@stable --activate
 
       - name: Init docker
-        run: docker-compose up -d
+        run: docker compose up -d --wait
 
       - name: Install
         run: yarn
@@ -40,4 +39,4 @@ jobs:
         run: yarn test
 
       - name: Teardown docker
-        run: docker-compose down
+        run: docker compose down

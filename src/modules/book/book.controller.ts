@@ -1,8 +1,7 @@
 import { Body, Controller, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
-import { EntityRepository, QueryOrder, wrap } from '@mikro-orm/core';
+import { EntityRepository, QueryOrder, wrap, EntityManager } from '@mikro-orm/mysql';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { Book } from '../../entities';
-import { EntityManager } from '@mikro-orm/mysql';
 
 @Controller('book')
 export class BookController {
