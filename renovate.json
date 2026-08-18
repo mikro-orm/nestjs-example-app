@@ -21,5 +21,6 @@
   ],
   "schedule": [
     "every weekday"
-  ]
+  ],
+  "minimumReleaseAge": "1 day"
 }
